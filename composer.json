@@ -1,0 +1,26 @@
+{
+    "name": "loggium/loggium",
+    "description": "Yet another PSR logging implementation",
+	"keywords": ["log", "logging", "psr-3"],
+	"homepage": "https://github.com/vkryptondev/loggium",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Loggium\\": "src/Loggium/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vladislaw Krypton",
+            "email": "vladislaw.krypton@gmail.com"
+        }
+    ],
+    "require": {
+		"php": ">=8.1",
+        "psr/log": "^3.0"
+    },
+	"provide": {
+        "psr/log-implementation": "3.0.0"
+    },
+}
