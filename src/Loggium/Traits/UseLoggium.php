@@ -1,6 +1,6 @@
 <?php
 
-namespace Traits;
+namespace Loggium\Traits;
 
 trait UseLoggium
 {
@@ -8,6 +8,6 @@ trait UseLoggium
 
     private function loggium(): \Logger
     {
-        return $this->loggiumInstance ??= new \Logger(__CLASS__);
+        return $this->loggiumInstance ??= new \Logger($this);
     }
 }

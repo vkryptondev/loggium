@@ -1,4 +1,5 @@
 <?php
+namespace Loggium;
 
 enum Level: int
 {
