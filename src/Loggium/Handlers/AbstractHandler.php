@@ -59,6 +59,8 @@ class AbstractHandler implements HandlerInterface
                 $data = implode(':', $data);
                 if (array_key_exists($mixin, $mixins)) {
                     return $mixins[$mixin]($data);
+                } else {
+                    return $matches[0];
                 }
             } else if (array_key_exists($key, $mixins)) {
                 return $mixins[$key]();
