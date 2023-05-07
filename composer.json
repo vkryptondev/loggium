@@ -1,8 +1,8 @@
 {
     "name": "loggium/loggium",
     "description": "Yet another PSR logging implementation",
-	"keywords": ["log", "logging", "psr-3"],
-	"homepage": "https://github.com/vkryptondev/loggium",
+    "keywords": ["log", "logging", "psr-3"],
+    "homepage": "https://github.com/vkryptondev/loggium",
     "type": "library",
     "license": "MIT",
     "autoload": {
@@ -17,11 +17,11 @@
         }
     ],
     "require": {
-		"php": ">=8.1",
+        "php": ">=8.1",
         "psr/log": "^3.0",
         "symfony/var-dumper": "^6.2"
     },
-	"provide": {
+    "provide": {
         "psr/log-implementation": "3.0.0"
     }
 }
