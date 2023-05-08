@@ -4,7 +4,7 @@ namespace Loggium\Traits;
 
 use Loggium\Logger;
 
-trait UseLoggium
+trait HasLoggium
 {
     private ?Logger $loggiumInstance = null;
 
