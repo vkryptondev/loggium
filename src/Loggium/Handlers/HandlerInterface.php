@@ -4,6 +4,7 @@ namespace Loggium\Handlers;
 
 use Loggium\Formatters\FormatterInterface;
 use Loggium\Record;
+use Psr\Log\LoggerInterface;
 
 interface HandlerInterface
 {
@@ -12,4 +13,6 @@ interface HandlerInterface
     public function handle(Record $record): void;
 
     public function filter(Record $record): bool;
+
+    public function setLogger(LoggerInterface $logger): void;
 }

@@ -6,6 +6,39 @@ use \Psr\Log\LoggerInterface;
 
 class Logger implements LoggerInterface
 {
+    public function __construct(public string $module = 'main', private array $handlers = [])
+    {
+    }
+
+    public function addHandler(HandlerInterface $handler): void
+    {
+        $handler->setLogger($this);
+
+        $this->handlers[] = $handler;
+    }
+
+    public function log($level, \Stringable|string $message, array $context = []): void
+    {
+        if (!($level instanceof Level)) {
+            if (is_string($level)) {
+                $level = Level::fromName($level);
+            } elseif (is_int($level)) {
+                $level = Level::fromValue($level);
+            } else {
+                throw new \InvalidArgumentException('Invalid level');
+            }
+        }
+        /** @var Level $level */
+
+        $record = new Record($level, $message, $context);
+
+        foreach($this->handlers as $handler) {
+            if ($handler->filter($record)) {
+                $handler->handle($record);
+            }
+        }
+    }
+
     public function emergency(\Stringable|string $message, array $context = []): void
     {
         $this->log(Level::Emergency, $message, $context);
@@ -44,44 +77,5 @@ class Logger implements LoggerInterface
     public function debug(\Stringable|string $message, array $context = []): void
     {
         $this->log(Level::Debug, $message, $context);
-    }
-
-    public function log($level, \Stringable|string $message, array $context = []): void
-    {
-        if (!($level instanceof Level)) {
-            if (is_string($level)) {
-                $level = Level::fromName($level);
-            } elseif (is_int($level)) {
-                $level = Level::fromValue($level);
-            } else {
-                throw new \InvalidArgumentException('Invalid level');
-            }
-        }
-        /** @var Level $level */
-
-        $record = new Record($level, $message, $context);
-
-        foreach($this->handlers as $handler) {
-            if ($handler->filter($record)) {
-                $handler->handle($record);
-            }
-        }
-    }
-
-    public function __construct(private ?object $target = null, private array $handlers = [])
-    {
-        //
-    }
-
-    public function destroy(): void
-    {
-        if ($this->target) {
-            $this->target->loggiumInstance = null;
-        }
-    }
-
-    public function addHandler(HandlerInterface $handler): void
-    {
-        $this->handlers[] = $handler;
     }
 }
