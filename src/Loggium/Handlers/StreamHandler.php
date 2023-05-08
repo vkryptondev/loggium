@@ -4,7 +4,9 @@ namespace Loggium\Handlers;
 
 use Loggium\Level;
 use Loggium\Record;
-
+/**
+ * @property array{int f} $options
+ */
 class StreamHandler extends AbstractHandler
 {
     public function handle(Record $record): void
@@ -18,10 +20,5 @@ class StreamHandler extends AbstractHandler
         return array_merge(parent::defaults(), [
             'path' => 'php://stdout',
         ]);
-    }
-
-    public function filter(Record $record): bool
-    {
-        return parent::filter($record);
     }
 }

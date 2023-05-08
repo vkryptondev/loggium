@@ -13,6 +13,4 @@ interface HandlerInterface
     public function handle(Record $record): void;
 
     public function filter(Record $record): bool;
-
-    public function setLogger(LoggerInterface $logger): void;
 }
