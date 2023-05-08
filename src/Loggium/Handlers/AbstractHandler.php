@@ -10,9 +10,8 @@ use Loggium\Helper;
 use Loggium\Level;
 use Loggium\Record;
 
-class AbstractHandler implements HandlerInterface
+abstract class AbstractHandler implements HandlerInterface
 {
-
     public function __construct(protected ?FormatterInterface $formatter = null, protected array $options = [])
     {
         $this->formatter = $formatter ?? new SimpleFormatter();
@@ -28,14 +27,6 @@ class AbstractHandler implements HandlerInterface
         ];
     }
 
-    /**
-     * @throws Exception
-     */
-    public function handle(Record $record): void
-    {
-        throw new \RuntimeException('This method is not implemented');
-    }
-
     public function filter(Record $record): bool
     {
         return (
@@ -49,8 +40,5 @@ class AbstractHandler implements HandlerInterface
         return $this->formatter->format($record, $this->options);
     }
 
-    public function test(Record $record): \Closure
-    {
-        // TODO: Implement test() method.
-    }
+    abstract public function handle(Record $record): void;
 }

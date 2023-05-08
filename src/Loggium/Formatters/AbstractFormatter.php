@@ -25,7 +25,9 @@ abstract class AbstractFormatter implements FormatterInterface
             if (array_key_exists($key, $context)) {
                 $value = $context[$key];
 
-                if (is_callable($value)) {
+                if (empty($value)) {
+                    return '';
+                }  else if (is_callable($value)) {
                     return $value();
                 } else if (is_array($value)) {
                     return $this->dump($value);
