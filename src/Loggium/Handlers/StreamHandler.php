@@ -2,7 +2,9 @@
 
 namespace Loggium\Handlers;
 
+use Loggium\Helper;
 use Loggium\Level;
+use Loggium\Mixins\DatetimeMixin;
 use Loggium\Record;
 /**
  * @property array{int f} $options
@@ -11,7 +13,15 @@ class StreamHandler extends AbstractHandler
 {
     public function handle(Record $record): void
     {
-        $stream = fopen($this->options['path'], 'a');
+        $path = Helper::interpolate(
+            $this->options['path'], [
+                'module' => $this->logger?->module ?? '',
+                'level' => strtolower($record->level->name),
+            ], [
+                'datetime' => new DatetimeMixin()
+            ]
+        );
+        $stream = fopen($path, 'a');
         fwrite($stream, $this->format($record) . PHP_EOL);
         fclose($stream);
     }
