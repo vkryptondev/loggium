@@ -14,10 +14,12 @@ class StreamHandler extends AbstractHandler
     public function handle(Record $record): void
     {
         $path = Helper::interpolate(
-            $this->options['path'], [
+            $this->options['path'],
+            [
                 'module' => $this->logger?->module ?? '',
                 'level' => strtolower($record->level->name),
-            ], [
+            ],
+            [
                 'datetime' => new DatetimeMixin()
             ]
         );
