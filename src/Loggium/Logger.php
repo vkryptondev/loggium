@@ -8,7 +8,7 @@ class Logger implements LoggerInterface
 {
     public const VERSION = '1.1.0';
 
-    public function __construct(public string $module = 'main', private array $handlers = [])
+    public function __construct(public string $module = 'main', private array $handlers = [], public array $extra = [])
     {
     }
 
@@ -17,6 +17,11 @@ class Logger implements LoggerInterface
         $handler->setLogger($this);
 
         $this->handlers[] = $handler;
+    }
+
+    public function extra(string $key, mixed $value): void
+    {
+        $this->extra[$key] = $value;
     }
 
     public function log($level, \Stringable|string $message, array $context = []): void

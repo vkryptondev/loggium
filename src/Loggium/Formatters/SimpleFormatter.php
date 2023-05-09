@@ -15,7 +15,8 @@ class SimpleFormatter extends AbstractFormatter
                 'module' => $this->handler->logger?->module ?? '',
                 'level' => strtoupper($record->level->name),
                 'message' => $record->message,
-                'context' => $record->context
+                'context' => $record->context,
+                'extra' => $this->handler->logger?->extra ?? [],
             ],
             $this->mixins
         );

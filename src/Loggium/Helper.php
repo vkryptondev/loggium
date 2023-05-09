@@ -61,4 +61,9 @@ class Helper
         }
         return $array;
     }
+
+    public static function fqcn_slug(string $fqcn): string
+    {
+        return str_replace('\\', '_', $fqcn);
+    }
 }

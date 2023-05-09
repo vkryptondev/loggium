@@ -16,7 +16,7 @@ class StreamHandler extends AbstractHandler
         $path = Helper::interpolate(
             $this->options['path'],
             [
-                'module' => $this->logger?->module ?? '',
+                'module' => Helper::fqcn_slug($this->logger?->module ?? ''),
                 'level' => strtolower($record->level->name),
             ],
             [

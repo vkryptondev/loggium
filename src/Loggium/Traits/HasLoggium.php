@@ -10,6 +10,6 @@ trait HasLoggium
 
     private function loggium(): Logger
     {
-        return $this->loggiumInstance ??= new Logger($this);
+        return $this->loggiumInstance ??= new Logger(get_class($this));
     }
 }
