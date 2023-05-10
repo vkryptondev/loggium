@@ -6,7 +6,7 @@ use \Psr\Log\LoggerInterface;
 
 class Logger implements LoggerInterface
 {
-    public const VERSION = '1.1.0';
+    public const VERSION = '1.1.1';
 
     public function __construct(public string $module = 'main', private array $handlers = [], public array $extra = [])
     {
