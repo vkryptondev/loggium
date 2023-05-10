@@ -12,11 +12,11 @@ class SimpleFormatter extends AbstractFormatter
         return Helper::interpolate(
             $options['format'],
             [
-                'module' => $this->handler->logger?->module ?? '',
+                'module' => $this->handler?->logger?->module ?? '',
                 'level' => strtoupper($record->level->name),
                 'message' => $record->message,
                 'context' => $record->context,
-                'extra' => $this->handler->logger?->extra ?? [],
+                'extra' => $this?->handler->logger?->extra ?? []
             ],
             $this->mixins
         );

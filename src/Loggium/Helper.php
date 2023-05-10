@@ -14,7 +14,7 @@ class Helper
 
                 if (empty($value)) {
                     return '';
-                } else if (is_array($value)) {
+                } else if (is_array($value) || is_object($value)) {
                     return self::dump($value);
                 } else {
                     return $value;
@@ -33,7 +33,7 @@ class Helper
                 $value = Helper::getDotValue($data, $key, '{empty}');
                 if ($value === '{empty}') {
                     return $original;
-                } else if (is_array($value)) {
+                } else if (is_array($value) || is_object($value)) {
                     return self::dump($value);
                 } else {
                     return $value;
@@ -44,7 +44,7 @@ class Helper
         }, $template);
     }
 
-    public static function dump(mixed $object) {
+    public static function dump(mixed $object): string {
         $dumper = new \Symfony\Component\VarDumper\Dumper\CliDumper();
         $cloner = new \Symfony\Component\VarDumper\Cloner\VarCloner();
         return $dumper->dump($cloner->cloneVar($object), true);
