@@ -10,7 +10,7 @@ class SizeRotatingStrategy extends AbstractRotatingStrategy
     public function shouldRotate(array $options, Record $record): bool
     {
         $size = $this->cm_common_convert_to_bytes($this->config['max_size']);
-        return filesize($options['path']) > $size;
+        return file_exists($options['path']) && filesize($options['path']) > $size;
     }
 
     /**

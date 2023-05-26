@@ -35,7 +35,7 @@ class FileHandler extends StreamHandler
                     unlink($this->options['path']);
                     file_put_contents('compress.zlib://' . sprintf($filename, 1), $data);
                 } else {
-                    rename($this->options['path'], sprintf($filename, $i - 1));
+                    rename($this->options['path'], sprintf($filename, 1));
                 }
             }
         }
